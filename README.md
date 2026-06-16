@@ -1,0 +1,1042 @@
+[index.html.html](https://github.com/user-attachments/files/29021446/index.html.html)
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRON FORGE GYM</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0A0A0A;
+    --rojo: #E02020;
+    --rojo-oscuro: #A01515;
+    --rojo-suave: #FF3333;
+    --gris-oscuro: #141414;
+    --gris-medio: #222222;
+    --gris-claro: #3A3A3A;
+    --texto-muted: #888;
+    --blanco: #F5F5F5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--negro);
+    color: var(--blanco);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #1f1f1f;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--blanco);
+  }
+  .nav-logo span { color: var(--rojo); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--texto-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--rojo); }
+  .nav-cta {
+    background: var(--rojo);
+    color: #fff !important;
+    padding: 8px 20px;
+    border-radius: 2px;
+    font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: var(--rojo-oscuro); color: #fff !important; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    position: relative;
+    background: linear-gradient(135deg, #0A0A0A 0%, #1a0505 50%, #0A0A0A 100%);
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 60%; height: 100%;
+    background: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80') center/cover no-repeat;
+    opacity: 0.12;
+    mask-image: linear-gradient(to left, rgba(0,0,0,0.6), transparent);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 680px; }
+  .hero-eyebrow {
+    display: inline-block;
+    background: var(--rojo);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title em { color: var(--rojo); font-style: normal; }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--texto-muted);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--rojo);
+    color: #fff;
+    padding: 14px 32px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.1s;
+    border-radius: 2px;
+  }
+  .btn-primary:hover { background: var(--rojo-oscuro); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--blanco);
+    padding: 14px 32px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid #3A3A3A;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+    border-radius: 2px;
+  }
+  .btn-outline:hover { border-color: var(--rojo); color: var(--rojo); }
+
+  .stats-bar {
+    display: flex; gap: 3rem; margin-top: 3.5rem; flex-wrap: wrap;
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--blanco);
+    line-height: 1;
+  }
+  .stat-num span { color: var(--rojo); }
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--texto-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  /* SECTIONS */
+  section { padding: 90px 5%; }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rojo);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 1rem;
+    color: var(--blanco);
+  }
+  .section-sub {
+    font-size: 1rem;
+    color: var(--texto-muted);
+    max-width: 540px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  /* PLANES */
+  #planes { background: var(--gris-oscuro); }
+  .planes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5px;
+    margin-top: 3rem;
+  }
+  .plan-card {
+    background: var(--negro);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: background 0.2s;
+    border: 1px solid #1c1c1c;
+  }
+  .plan-card:hover { background: #111; }
+  .plan-card.featured {
+    background: var(--rojo);
+    border-color: var(--rojo);
+  }
+  .plan-card.featured:hover { background: var(--rojo-oscuro); border-color: var(--rojo-oscuro); }
+  .plan-badge {
+    display: inline-block;
+    background: var(--negro);
+    color: var(--blanco);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    margin-bottom: 1.5rem;
+  }
+  .plan-card.featured .plan-badge { background: rgba(0,0,0,0.25); }
+  .plan-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .plan-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+  .plan-price sup {
+    font-size: 1.4rem;
+    vertical-align: top;
+    margin-top: 10px;
+    display: inline-block;
+  }
+  .plan-period {
+    font-size: 0.8rem;
+    color: rgba(245,245,245,0.55);
+    margin-bottom: 1.8rem;
+    font-weight: 500;
+  }
+  .plan-card.featured .plan-period { color: rgba(255,255,255,0.65); }
+  .plan-features { list-style: none; margin-bottom: 2rem; }
+  .plan-features li {
+    font-size: 0.9rem;
+    padding: 8px 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex; align-items: center; gap: 8px;
+    color: rgba(245,245,245,0.8);
+  }
+  .plan-card.featured .plan-features li { border-top-color: rgba(255,255,255,0.15); }
+  .plan-features li::before { content: '✓'; color: var(--rojo); font-weight: 700; }
+  .plan-card.featured .plan-features li::before { color: #fff; }
+  .plan-cta {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .plan-cta-outline {
+    background: transparent;
+    color: var(--blanco);
+    border: 1px solid #3A3A3A;
+  }
+  .plan-cta-outline:hover { border-color: var(--rojo); color: var(--rojo); }
+  .plan-cta-solid {
+    background: #fff;
+    color: var(--rojo);
+    border: none;
+  }
+  .plan-cta-solid:hover { background: #ffe0e0; }
+
+  /* HORARIOS */
+  #horarios { background: var(--negro); }
+  .schedule-nav {
+    display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 2rem;
+  }
+  .sched-tab {
+    padding: 8px 18px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid #2a2a2a;
+    background: transparent;
+    color: var(--texto-muted);
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .sched-tab.active, .sched-tab:hover {
+    background: var(--rojo);
+    color: #fff;
+    border-color: var(--rojo);
+  }
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .class-card {
+    background: var(--gris-medio);
+    border: 1px solid #2a2a2a;
+    padding: 1.2rem 1.5rem;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+    cursor: default;
+  }
+  .class-card:hover { border-color: var(--rojo); }
+  .class-time {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--rojo);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .class-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+  .class-trainer {
+    font-size: 0.8rem;
+    color: var(--texto-muted);
+    margin-bottom: 0.8rem;
+  }
+  .class-meta {
+    display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;
+  }
+  .class-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .tag-intensidad-alta { background: #3a0808; color: #ff8080; }
+  .tag-intensidad-media { background: #2a2000; color: #ffcc44; }
+  .tag-intensidad-baja { background: #0a2a0a; color: #66dd66; }
+  .class-duration {
+    font-size: 0.75rem;
+    color: var(--texto-muted);
+  }
+
+  /* ENTRENADORES */
+  #entrenadores { background: var(--gris-oscuro); }
+  .trainers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .trainer-card {
+    background: var(--negro);
+    border: 1px solid #1c1c1c;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .trainer-card:hover { transform: translateY(-4px); border-color: var(--rojo); }
+  .trainer-photo {
+    height: 260px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .trainer-photo-bg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 6rem;
+  }
+  .trainer-initials {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    position: relative; z-index: 1;
+  }
+  .trainer-info { padding: 1.2rem 1.5rem 1.5rem; }
+  .trainer-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+  .trainer-specialty {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--rojo);
+    margin-bottom: 0.6rem;
+  }
+  .trainer-bio {
+    font-size: 0.85rem;
+    color: var(--texto-muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .trainer-certs {
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .cert-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid #2a2a2a;
+    color: var(--texto-muted);
+    border-radius: 2px;
+  }
+
+  /* REGISTRO */
+  #registro { background: var(--negro); }
+  .registro-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  @media (max-width: 768px) {
+    .registro-wrap { grid-template-columns: 1fr; gap: 2rem; }
+    nav { display: none; }
+    .stats-bar { gap: 1.5rem; }
+  }
+  .registro-info {}
+  .benefits-list { list-style: none; margin-top: 1.5rem; }
+  .benefits-list li {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #1c1c1c;
+    font-size: 0.9rem;
+    color: rgba(245,245,245,0.8);
+  }
+  .benefit-icon {
+    width: 36px; height: 36px; min-width: 36px;
+    background: #1a0505;
+    border: 1px solid var(--rojo-oscuro);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    border-radius: 2px;
+  }
+  .benefit-text strong {
+    display: block;
+    font-weight: 600;
+    color: var(--blanco);
+    margin-bottom: 2px;
+    font-size: 0.9rem;
+  }
+  .register-form {
+    background: var(--gris-oscuro);
+    border: 1px solid #2a2a2a;
+    padding: 2.5rem 2rem;
+    border-radius: 2px;
+  }
+  .form-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .form-subtitle {
+    font-size: 0.85rem;
+    color: var(--texto-muted);
+    margin-bottom: 1.8rem;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--texto-muted);
+    margin-bottom: 6px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: var(--negro);
+    border: 1px solid #2a2a2a;
+    color: var(--blanco);
+    padding: 11px 14px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--rojo);
+  }
+  .form-group select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 36px;
+  }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-submit {
+    width: 100%;
+    background: var(--rojo);
+    color: #fff;
+    border: none;
+    padding: 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { background: var(--rojo-oscuro); }
+  .form-success {
+    display: none;
+    background: #0a2a0a;
+    border: 1px solid #1a5a1a;
+    color: #88ee88;
+    padding: 1rem 1.2rem;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--gris-oscuro);
+    border-top: 1px solid #1c1c1c;
+    padding: 3rem 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+  .footer-logo span { color: var(--rojo); }
+  .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .footer-links a {
+    color: var(--texto-muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--rojo); }
+  .footer-copy { font-size: 0.75rem; color: #444; }
+
+  /* Divider */
+  .divider {
+    width: 48px; height: 3px;
+    background: var(--rojo);
+    margin: 1rem 0 1.5rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">IRON<span>FORGE</span></div>
+  <ul class="nav-links">
+    <li><a href="#planes">Planes</a></li>
+    <li><a href="#horarios">Horarios</a></li>
+    <li><a href="#entrenadores">Entrenadores</a></li>
+    <li><a href="#registro" class="nav-cta">Únete</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Gimnasio Premium · Est. 2018</div>
+    <h1 class="hero-title">
+      FORJA<br>TU <em>MEJOR</em><br>VERSIÓN
+    </h1>
+    <p class="hero-sub">
+      Entrenamiento de alto rendimiento, instructores certificados y equipos de última generación. Tu transformación comienza aquí.
+    </p>
+    <div class="hero-actions">
+      <a href="#registro" class="btn-primary">Empezar gratis</a>
+      <a href="#planes" class="btn-outline">Ver planes</a>
+    </div>
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-num">1<span>2+</span></div>
+        <div class="stat-label">Años de experiencia</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3<span>k+</span></div>
+        <div class="stat-label">Miembros activos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2<span>4/7</span></div>
+        <div class="stat-label">Acceso disponible</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANES -->
+<section id="planes">
+  <div class="section-label">Membresías</div>
+  <h2 class="section-title">Planes & Precios</h2>
+  <div class="divider"></div>
+  <p class="section-sub">Sin contratos ocultos. Elige el plan que mejor se adapte a tu ritmo y objetivos.</p>
+
+  <div class="planes-grid">
+    <!-- BÁSICO -->
+    <div class="plan-card">
+      <div class="plan-badge">Básico</div>
+      <div class="plan-name">Starter</div>
+      <div class="plan-price"><sup>$</sup>49<sup style="font-size:0.9rem;margin-top:18px">.900</sup></div>
+      <div class="plan-period">COP / mes</div>
+      <ul class="plan-features">
+        <li>Acceso sala de pesas</li>
+        <li>Zona cardiovascular</li>
+        <li>Casillero personal</li>
+        <li>2 clases grupales al mes</li>
+        <li>App de seguimiento</li>
+      </ul>
+      <button class="plan-cta plan-cta-outline" onclick="document.getElementById('registro').scrollIntoView({behavior:'smooth'})">Elegir Starter</button>
+    </div>
+
+    <!-- POPULAR -->
+    <div class="plan-card featured">
+      <div class="plan-badge">⭐ Más popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price"><sup>$</sup>89<sup style="font-size:0.9rem;margin-top:18px">.900</sup></div>
+      <div class="plan-period">COP / mes · Primera semana gratis</div>
+      <ul class="plan-features">
+        <li>Todo lo de Starter</li>
+        <li>Clases grupales ilimitadas</li>
+        <li>1 sesión mensual con entrenador</li>
+        <li>Evaluación física trimestral</li>
+        <li>Acceso sauna y spa</li>
+        <li>Nutrición básica</li>
+      </ul>
+      <button class="plan-cta plan-cta-solid" onclick="document.getElementById('registro').scrollIntoView({behavior:'smooth'})">Elegir Pro</button>
+    </div>
+
+    <!-- ELITE -->
+    <div class="plan-card">
+      <div class="plan-badge">Elite</div>
+      <div class="plan-name">Total</div>
+      <div class="plan-price"><sup>$</sup>149<sup style="font-size:0.9rem;margin-top:18px">.900</sup></div>
+      <div class="plan-period">COP / mes</div>
+      <ul class="plan-features">
+        <li>Todo lo de Pro</li>
+        <li>Entrenamiento personalizado</li>
+        <li>Plan nutricional completo</li>
+        <li>Acceso 24/7</li>
+        <li>Terapia de recuperación</li>
+        <li>Análisis corporal mensual</li>
+        <li>Invitado gratuito al mes</li>
+      </ul>
+      <button class="plan-cta plan-cta-outline" onclick="document.getElementById('registro').scrollIntoView({behavior:'smooth'})">Elegir Total</button>
+    </div>
+  </div>
+</section>
+
+<!-- HORARIOS -->
+<section id="horarios">
+  <div class="section-label">Clases grupales</div>
+  <h2 class="section-title">Horarios</h2>
+  <div class="divider"></div>
+  <p class="section-sub">Más de 30 clases semanales para todos los niveles. Reserva tu lugar desde la app.</p>
+
+  <div class="schedule-nav">
+    <button class="sched-tab active" onclick="showDay('lunes',this)">Lunes</button>
+    <button class="sched-tab" onclick="showDay('martes',this)">Martes</button>
+    <button class="sched-tab" onclick="showDay('miercoles',this)">Miércoles</button>
+    <button class="sched-tab" onclick="showDay('jueves',this)">Jueves</button>
+    <button class="sched-tab" onclick="showDay('viernes',this)">Viernes</button>
+    <button class="sched-tab" onclick="showDay('sabado',this)">Sábado</button>
+    <button class="sched-tab" onclick="showDay('domingo',this)">Domingo</button>
+  </div>
+
+  <div id="schedule-container" class="schedule-grid"></div>
+</section>
+
+<!-- ENTRENADORES -->
+<section id="entrenadores">
+  <div class="section-label">Nuestro equipo</div>
+  <h2 class="section-title">Entrenadores</h2>
+  <div class="divider"></div>
+  <p class="section-sub">Profesionales certificados con pasión por transformar vidas a través del deporte y el bienestar.</p>
+
+  <div class="trainers-grid">
+    <div class="trainer-card">
+      <div class="trainer-photo" style="background:#1a0505;">
+        <div class="trainer-initials" style="background:#3a0808;color:#ff8080;">CR</div>
+      </div>
+      <div class="trainer-info">
+        <div class="trainer-name">Carlos Restrepo</div>
+        <div class="trainer-specialty">Fuerza & Powerlifting</div>
+        <p class="trainer-bio">Campeón nacional de powerlifting, 10 años formando atletas de alto rendimiento y entusiastas del fitness.</p>
+        <div class="trainer-certs">
+          <span class="cert-tag">NSCA</span>
+          <span class="cert-tag">Powerlifting</span>
+          <span class="cert-tag">Nutrición</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trainer-card">
+      <div class="trainer-photo" style="background:#0a1a0a;">
+        <div class="trainer-initials" style="background:#1a3a1a;color:#66dd66;">LG</div>
+      </div>
+      <div class="trainer-info">
+        <div class="trainer-name">Laura Gómez</div>
+        <div class="trainer-specialty">Yoga & Movilidad</div>
+        <p class="trainer-bio">Instructora certificada en Hatha y Vinyasa Yoga, experta en recuperación funcional y movilidad articular.</p>
+        <div class="trainer-certs">
+          <span class="cert-tag">RYT-500</span>
+          <span class="cert-tag">Pilates</span>
+          <span class="cert-tag">Fascial</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trainer-card">
+      <div class="trainer-photo" style="background:#0a0a1a;">
+        <div class="trainer-initials" style="background:#1a1a3a;color:#8888ff;">AM</div>
+      </div>
+      <div class="trainer-info">
+        <div class="trainer-name">Andrés Mejía</div>
+        <div class="trainer-specialty">CrossFit & HIIT</div>
+        <p class="trainer-bio">Entrenador Level 2 CrossFit con especialización en entrenamiento funcional de alta intensidad y acondicionamiento.</p>
+        <div class="trainer-certs">
+          <span class="cert-tag">CF-L2</span>
+          <span class="cert-tag">HIIT</span>
+          <span class="cert-tag">Olympic WL</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trainer-card">
+      <div class="trainer-photo" style="background:#1a1000;">
+        <div class="trainer-initials" style="background:#3a2a00;color:#ffcc44;">SD</div>
+      </div>
+      <div class="trainer-info">
+        <div class="trainer-name">Sandra Duque</div>
+        <div class="trainer-specialty">Cardio & Zumba</div>
+        <p class="trainer-bio">Especialista en entrenamiento cardiovascular y danzas fitness, con más de 8 años motivando a comunidades activas.</p>
+        <div class="trainer-certs">
+          <span class="cert-tag">Zumba B1</span>
+          <span class="cert-tag">Spinning</span>
+          <span class="cert-tag">Step</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRO -->
+<section id="registro">
+  <div class="registro-wrap">
+    <div class="registro-info">
+      <div class="section-label">Únete hoy</div>
+      <h2 class="section-title">Tu primera semana<br><em style="color:var(--rojo);font-style:normal;">es gratis</em></h2>
+      <div class="divider"></div>
+      <p class="section-sub">Regístrate en menos de 2 minutos y empieza tu transformación sin compromisos.</p>
+
+      <ul class="benefits-list">
+        <li>
+          <div class="benefit-icon">💪</div>
+          <div class="benefit-text">
+            <strong>Sin matrícula de inscripción</strong>
+            Comienza sin costos de activación ni pagos ocultos.
+          </div>
+        </li>
+        <li>
+          <div class="benefit-icon">📱</div>
+          <div class="benefit-text">
+            <strong>App de seguimiento incluida</strong>
+            Registra tus rutinas, progreso y reserva clases desde tu celular.
+          </div>
+        </li>
+        <li>
+          <div class="benefit-icon">🏆</div>
+          <div class="benefit-text">
+            <strong>Evaluación física inicial</strong>
+            Tu entrenador diseña un plan personalizado desde el día uno.
+          </div>
+        </li>
+        <li>
+          <div class="benefit-icon">❌</div>
+          <div class="benefit-text">
+            <strong>Cancela cuando quieras</strong>
+            Sin contratos de permanencia ni penalidades.
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="register-form">
+        <div class="form-title">Crear cuenta</div>
+        <p class="form-subtitle">Completa el formulario y te contactamos hoy mismo.</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" id="nombre" placeholder="Tu nombre" />
+          </div>
+          <div class="form-group">
+            <label>Apellido</label>
+            <input type="text" id="apellido" placeholder="Tu apellido" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" id="email" placeholder="correo@ejemplo.com" />
+        </div>
+
+        <div class="form-group">
+          <label>Teléfono / WhatsApp</label>
+          <input type="tel" id="telefono" placeholder="+57 300 000 0000" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Plan de interés</label>
+            <select id="plan">
+              <option value="">Selecciona...</option>
+              <option>Starter — $49.900</option>
+              <option>Pro — $89.900</option>
+              <option>Total — $149.900</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Objetivo</label>
+            <select id="objetivo">
+              <option value="">Selecciona...</option>
+              <option>Perder peso</option>
+              <option>Ganar músculo</option>
+              <option>Mejorar resistencia</option>
+              <option>Tonificar</option>
+              <option>Rehabilitación</option>
+              <option>Bienestar general</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>¿Tienes experiencia previa en el gym?</label>
+          <select id="experiencia">
+            <option value="">Selecciona...</option>
+            <option>No, es mi primera vez</option>
+            <option>Principiante (menos de 1 año)</option>
+            <option>Intermedio (1–3 años)</option>
+            <option>Avanzado (más de 3 años)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Mensaje (opcional)</label>
+          <textarea id="mensaje" placeholder="¿Tienes alguna pregunta o condición especial que debamos conocer?"></textarea>
+        </div>
+
+        <button class="form-submit" onclick="submitForm()">Reservar mi semana gratis →</button>
+
+        <div class="form-success" id="form-success">
+          ✅ ¡Registro exitoso! Te contactaremos en las próximas 2 horas para confirmar tu acceso.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">IRON<span>FORGE</span> GYM</div>
+  <div class="footer-links">
+    <a href="#planes">Planes</a>
+    <a href="#horarios">Horarios</a>
+    <a href="#entrenadores">Entrenadores</a>
+    <a href="#registro">Registro</a>
+    <a href="#">Política de privacidad</a>
+  </div>
+  <div class="footer-copy">© 2025 IronForge Gym. Todos los derechos reservados.</div>
+</footer>
+
+<script>
+const scheduleData = {
+  lunes: [
+    { time: '6:00 AM', name: 'HIIT Total Body', trainer: 'Andrés Mejía', intensity: 'Alta', duration: '45 min' },
+    { time: '7:00 AM', name: 'Spinning', trainer: 'Sandra Duque', intensity: 'Alta', duration: '50 min' },
+    { time: '9:00 AM', name: 'Yoga Flow', trainer: 'Laura Gómez', intensity: 'Baja', duration: '60 min' },
+    { time: '12:00 PM', name: 'Power Lunch', trainer: 'Carlos Restrepo', intensity: 'Media', duration: '45 min' },
+    { time: '5:00 PM', name: 'CrossFit WOD', trainer: 'Andrés Mejía', intensity: 'Alta', duration: '60 min' },
+    { time: '7:00 PM', name: 'Zumba', trainer: 'Sandra Duque', intensity: 'Media', duration: '55 min' },
+  ],
+  martes: [
+    { time: '6:30 AM', name: 'Body Pump', trainer: 'Carlos Restrepo', intensity: 'Media', duration: '55 min' },
+    { time: '8:00 AM', name: 'Pilates', trainer: 'Laura Gómez', intensity: 'Baja', duration: '60 min' },
+    { time: '10:00 AM', name: 'Aeróbicos', trainer: 'Sandra Duque', intensity: 'Media', duration: '50 min' },
+    { time: '5:30 PM', name: 'Funcional', trainer: 'Andrés Mejía', intensity: 'Alta', duration: '50 min' },
+    { time: '7:00 PM', name: 'Stretching', trainer: 'Laura Gómez', intensity: 'Baja', duration: '40 min' },
+  ],
+  miercoles: [
+    { time: '6:00 AM', name: 'HIIT Express', trainer: 'Andrés Mejía', intensity: 'Alta', duration: '30 min' },
+    { time: '7:00 AM', name: 'Spinning', trainer: 'Sandra Duque', intensity: 'Alta', duration: '50 min' },
+    { time: '9:00 AM', name: 'Yoga Restaurativo', trainer: 'Laura Gómez', intensity: 'Baja', duration: '60 min' },
+    { time: '12:00 PM', name: 'Circuito Fuerza', trainer: 'Carlos Restrepo', intensity: 'Alta', duration: '50 min' },
+    { time: '6:00 PM', name: 'CrossFit WOD', trainer: 'Andrés Mejía', intensity: 'Alta', duration: '60 min' },
+    { time: '7:30 PM', name: 'Zumba Fit', trainer: 'Sandra Duque', intensity: 'Media', duration: '55 min' },
+  ],
+  jueves: [
+    { time: '6:30 AM', name: 'Body Combat', trainer: 'Andrés Mejía', intensity: 'Alta', duration: '55 min' },
+    { time: '8:00 AM', name: 'Pilates Mat', trainer: 'Laura Gómez', intensity: 'Baja', duration: '60 min' },
+    { time: '12:00 PM', name: 'Power Lunch', trainer: 'Carlos Restrepo', intensity: 'Media', duration: '45 min' },
+    { time: '5:30 PM', name: 'Step Aeróbicos', trainer: 'Sandra Duque', intensity: 'Media', duration: '50 min' },
+    { time: '7:00 PM', name: 'Movilidad Avanzada', trainer: 'Laura Gómez', intensity: 'Baja', duration: '45 min' },
+  ],
+  viernes: [
+    { time: '6:00 AM', name: 'HIIT Total Body', trainer: 'Andrés Mejía', intensity: 'Alta', duration: '45 min' },
+    { time: '7:00 AM', name: 'Spinning Intenso', trainer: 'Sandra Duque', intensity: 'Alta', duration: '50 min' },
+    { time: '9:00 AM', name: 'Yoga Flow', trainer: 'Laura Gómez', intensity: 'Baja', duration: '60 min' },
+    { time: '5:00 PM', name: 'Crossfit Friday', trainer: 'Andrés Mejía', intensity: 'Alta', duration: '60 min' },
+    { time: '7:00 PM', name: 'Zumba Party', trainer: 'Sandra Duque', intensity: 'Media', duration: '60 min' },
+  ],
+  sabado: [
+    { time: '7:00 AM', name: 'Bootcamp', trainer: 'Carlos Restrepo', intensity: 'Alta', duration: '60 min' },
+    { time: '8:30 AM', name: 'Yoga Mañanero', trainer: 'Laura Gómez', intensity: 'Baja', duration: '60 min' },
+    { time: '10:00 AM', name: 'Funcional Sport', trainer: 'Andrés Mejía', intensity: 'Media', duration: '55 min' },
+    { time: '11:30 AM', name: 'Spinning', trainer: 'Sandra Duque', intensity: 'Alta', duration: '50 min' },
+  ],
+  domingo: [
+    { time: '9:00 AM', name: 'Yoga Dominical', trainer: 'Laura Gómez', intensity: 'Baja', duration: '75 min' },
+    { time: '10:30 AM', name: 'Cardio Suave', trainer: 'Sandra Duque', intensity: 'Baja', duration: '45 min' },
+    { time: '12:00 PM', name: 'Stretching & Recovery', trainer: 'Laura Gómez', intensity: 'Baja', duration: '50 min' },
+  ],
+};
+
+function getTagClass(intensity) {
+  if (intensity === 'Alta') return 'tag-intensidad-alta';
+  if (intensity === 'Media') return 'tag-intensidad-media';
+  return 'tag-intensidad-baja';
+}
+
+function showDay(day, btn) {
+  document.querySelectorAll('.sched-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const container = document.getElementById('schedule-container');
+  const classes = scheduleData[day];
+  container.innerHTML = classes.map(c => `
+    <div class="class-card">
+      <div class="class-time">${c.time}</div>
+      <div class="class-name">${c.name}</div>
+      <div class="class-trainer">con ${c.trainer}</div>
+      <div class="class-meta">
+        <span class="class-tag ${getTagClass(c.intensity)}">${c.intensity}</span>
+        <span class="class-duration">⏱ ${c.duration}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+showDay('lunes', document.querySelector('.sched-tab'));
+
+function submitForm() {
+  const nombre = document.getElementById('nombre').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const plan = document.getElementById('plan').value;
+
+  if (!nombre || !email || !plan) {
+    alert('Por favor completa al menos: nombre, correo y plan de interés.');
+    return;
+  }
+
+  const btn = document.querySelector('.form-submit');
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    btn.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }, 1200);
+}
+</script>
+</body>
+</html>
